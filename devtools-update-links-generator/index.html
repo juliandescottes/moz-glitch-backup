@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DevTools Updates L</title>
+    <style type="text/css">
+      body {
+        margin: 40px 50px;
+        font-family: sans-serif;
+      }
+
+      #output {
+        padding: 20px;
+        overflow: hidden;
+        white-space: pre-wrap;
+      }
+
+      #input-container {
+        align-items: center;
+        display: grid;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-columns: max-content max-content;
+        margin: 10px 0;
+      }
+      
+      pre { 
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .copied-span {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DevTools Update links Generator</h1>
+    <p>Fill in the dates</p>
+    <div id="input-container">
+      <label>From</label><input id="from" type="date" /> <label>To</label
+      ><input id="to" type="date" />
+    </div>
+    <h1>Output</h1>
+    <div id="devtools-container">
+      <a id="link-devtools" href="">DevTools bugs</a
+      ><button id="copy-devtools" style="margin: 5px">Copy to clipboard</button>
+      <span class="copied-span">Copied!</span>
+      <pre id="hidden-devtools"></pre>
+    </div>
+    <div id="bidi-container">
+      <a id="link-bidi" href="">WebDriver BiDi bugs</a
+      ><button id="copy-bidi" style="margin: 5px">Copy to clipboard</button>
+      <span class="copied-span">Copied!</span>
+      <pre id="hidden-bidi"></pre>
+    </div>
+    <script type="text/javascript">
+      const fromInput = document.getElementById("from");
+      const toInput = document.getElementById("to");
+      const inputContainer = document.getElementById("input-container");
+
+      const selectLinkText = (link) => {
+        const range = document.createRange();
+        range.selectNodeContents(link);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        return sel;
+      };
+
+      const onCopyClick = id => {
+        const container = document.getElementById(id);
+        const sel = selectLinkText(container.querySelector("pre"));
+        document.execCommand("copy");
+        const copiedSpan = container.querySelector(".copied-span");
+        copiedSpan.style.display = "initial";
+        // Timeout is just here to give some user feedback: text gets selected and
+        // then unselected
+        setTimeout(() => { 
+          sel.removeAllRanges();
+          copiedSpan.style.display = "none";
+        }, 500);
+      };
+
+      const updateLinks = () => {
+        const from = document.getElementById("from").value;
+        const to = document.getElementById("to").value;
+        document.getElementById("link-devtools").href = document.getElementById("hidden-devtools").innerHTML =
+          `https://bugzilla.mozilla.org/buglist.cgi?chfield=cf_last_resolved&` +
+          `chfieldfrom=${from}&product=DevTools&chfieldto=${to}&classification=Client%20Software&` +
+          `classification=Developer%20Infrastructure&classification=Components&classification=Server%20Software` +
+          `&classification=Other&resolution=FIXED&columnlist=product%2Ccomponent%2Cassigned_to%2Cbug_status%2C` +
+          `resolution%2Cshort_desc%2Cchangeddate%2Cpriority%2Cbug_severity%2Cbug_type&bug_status=RESOLVED&` +
+          `bug_status=VERIFIED&bug_status=CLOSED&query_format=advanced`;
+        document.getElementById("link-bidi").href = document.getElementById("hidden-bidi").innerHTML =
+          `https://bugzilla.mozilla.org/buglist.cgi?chfieldfrom=${from}&chfieldto=${to}&o1=substring&` +
+          `j_top=OR&f2=status_whiteboard&chfieldvalue=FIXED&v1=[webdriver%3Am&resolution=FIXED&` +
+          `query_format=advanced&f1=status_whiteboard&chfield=resolution&o2=substring&` +
+          `columnlist=opendate%2Ccf_last_resolved%2Cshort_desc%2Ccomponent%2Cassigned_to%2Cbug_status` +
+          `%2Cresolution%2Ckeywords%2Cstatus_whiteboard%2Cpriority%2Ccf_fx_points`;
+      };
+
+      // Event listeners
+      inputContainer.addEventListener("input", updateLinks);
+      document
+        .getElementById("copy-devtools")
+        .addEventListener("click", () => onCopyClick("devtools-container"));
+      document
+        .getElementById("copy-bidi")
+        .addEventListener("click", () => onCopyClick("bidi-container"));
+
+      // Update initial output.
+      updateLinks();
+    </script>
+  </body>
+</html>
+
