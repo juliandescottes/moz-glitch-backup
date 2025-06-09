@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevTools Cycle Tasks Generator</title>
+  <style type="text/css">
+    body {
+      margin: 40px 50px;
+      font-family: sans-serif;
+    }
+
+    #output {
+      padding: 20px;
+      overflow: hidden;
+      white-space: pre-wrap;
+    }
+
+    #input-container {
+      align-items: center;
+      display: grid;
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      grid-template-columns: max-content max-content;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>DevTools Cycle Tasks Generator</h1>
+  <p>Fill in the cycle version</p>
+  <div id="input-container">
+    <label>Cycle Version</label><input id="cycle-version" placeholder="99">
+  </div>
+  <h1>Output</h1>
+  <p>The output is updated automatically when changing the cycle version above.</p>
+  <button id="copy-to-clipboard" style="margin:auto">Copy to clipboard</button>
+  <p>
+    Create a new bug blocking the <a href="https://bugzilla.mozilla.org/enter_bug.cgi?format=__default__&blocked=1704796&product=DevTools&component=General">cycle tasks meta</a>.
+  </p>
+  <pre id="output" style="border: 1px solid grey"></pre>
+  <script type="text/javascript">
+    const getTemplate = async () => {
+      const cycleVersion = parseInt(document.getElementById("cycle-version").value, 10);
+
+      if (!cycleVersion || isNaN(cycleVersion)) {
+        return `Invalid cycle version: ${cycleVersion}`;
+      }
+      
+      const dateRequest = await fetch("https://whattrainisitnow.com/api/release/schedule/?version=" + cycleVersion);
+      const dateJson = await dateRequest.json();
+      const softFreeze = dateJson.soft_code_freeze.split(" ")[0];
+      const mergeDay = dateJson.merge_day.split(" ")[0];
+
+      const backwardCleanupVersion = cycleVersion - 2;
+      const smokeTestReleaseVersion = cycleVersion - 1;
+      const previousMarionetteVersion = cycleVersion - 2;
+      const marionetteVersion = cycleVersion - 1;
+      const qaVersion = cycleVersion - 1;
+      const template =
+`Soft Freeze / Merge Date: ${softFreeze} / ${mergeDay} (from the [Release train page](https://whattrainisitnow.com/))
+More details about any of those tasks can be found at: https://firefox-source-docs.mozilla.org/devtools/release.html
+
+Anytime during the release:
+- [ ] outdated backward compatibility code removed ([doc](https://firefox-source-docs.mozilla.org/devtools/backend/backward-compatibility.html), [searchfox](https://searchfox.org/mozilla-central/search?path=&q=%40backward-compat%20{%20version%20${backwardCleanupVersion}%20}))
+- [ ] outdated telemetry probes removed ([bz query](https://mzl.la/3cCGDd3))
+- [ ] in devtools-qa bugs, needinfo the triage owner (or the assignee if they are a team member) to test the bug in beta channel ([bz query](https://bugzilla.mozilla.org/buglist.cgi?query_format=advanced&status_whiteboard_type=substring&list_id=16055636&o1=equals&status_whiteboard=[devtools-qa]&v1=fixed&f1=cf_status_firefox${qaVersion}))
+
+Close to the end of the release (eg 1 week before code freeze)
+- [ ] Update MDN data for the Compatibility panel follow [devtools/shared/compatibility/README.md](https://searchfox.org/mozilla-central/source/devtools/shared/compatibility/README.md)
+- [ ] Check the browser information in the Compatibility Panel is up to date (example: version number for Firefox Nightly should be ${cycleVersion}):
+  - Steps: Open the Inspector, then select the Compatibility side panel, and click on Settings to see the list of all browsers
+- [ ] smoke test for remote debugging against version ${smokeTestReleaseVersion} ([doc](https://firefox-source-docs.mozilla.org/devtools/release.html#smoke-test-remote-debugging))
+- [ ] smoke test for remote debugging against the same version (version ${cycleVersion}) ([same doc](https://firefox-source-docs.mozilla.org/devtools/release.html#smoke-test-remote-debugging))
+- [ ] check xpcshell debugging ([doc](https://firefox-source-docs.mozilla.org/devtools/release.html#check-xpcshell-debugging))
+
+Marionette and BiDi:
+- [ ] close to the end of release (~1 week), based on the [list of bugs fixed during the release](https://bugzilla.mozilla.org/buglist.cgi?list_id=16664529&v1=fixed&resolution=FIXED&f2=cf_status_firefox${previousMarionetteVersion}&query_format=advanced&o1=equals&f1=cf_status_firefox${marionetteVersion}&o2=notequals&status_whiteboard=%5Bwebdriver%3Arelnote%5D&columnlist=component%2Cresolution%2Cassigned_to%2Cshort_desc%2Cbug_type%2Cstatus_whiteboard&status_whiteboard_type=substring&v2=fixed), update Marionette release notes on MDN for ${marionetteVersion}: https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/${marionetteVersion}#webdriver_conformance_marionette.
+- [ ] right after the release of Firefox ${marionetteVersion}, send a mail to the [dev-webdriver](https://groups.google.com/a/mozilla.org/g/dev-webdriver) mailing list.
+
+For reference: [full list of Marionette and BiDi bugs fixed during the release](https://bugzilla.mozilla.org/buglist.cgi?o1=equals&v3=fixed&v2=%5Bwptsync%20downstream%5D&f1=cf_status_firefox${marionetteVersion}&f2=status_whiteboard&o3=notequals&component=Agent&component=Marionette&component=WebDriver%20BiDi&v1=fixed&resolution=FIXED&list_id=16664522&query_format=advanced&f3=cf_status_firefox${previousMarionetteVersion}&o2=notsubstring&columnlist=component%2Cresolution%2Cassigned_to%2Cshort_desc%2Cbug_type%2Cstatus_whiteboard&product=Remote%20Protocol).
+
+Template suggestion for the Marionette email (adjust wording if relevant):
+\`\`\`
+Firefox ${marionetteVersion} has just been released, containing updates for our WebDriver (BiDi, Marionette) support.
+
+You can find all the details in the change log for web developers:
+
+https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/${marionetteVersion}#webdriver_conformance_webdriver_bidi_marionette
+\`\`\`
+
+See https://docs.google.com/document/d/1t8pR_lcTkjZjX1ddOf6tyvPY8dtE519Vlu8wXX58x_E for detailed explanations about Marionette tasks, or contact :whimboo / :jdescottes for help
+
+Nice to have:
+- [ ] Generate webidl-pure-allowlist.js and webidl-deprecated-list.js ([doc](https://firefox-source-docs.mozilla.org/devtools/release.html#generate-webidl-pure-allowlist-js-and-webidl-deprecated-list-js))`;
+  return template;
+    }
+
+    const outputEl = document.getElementById("output");
+    const inputContainer = document.getElementById("input-container");
+    const copyToClipboardEl = document.getElementById("copy-to-clipboard");
+
+    const selectTemplateText = () => {
+      const range = document.createRange();
+      range.selectNodeContents(outputEl);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      return sel;
+    }
+    
+    const updateOutput = async () => {
+      outputEl.innerHTML = await getTemplate();
+    }
+    
+    // Event listeners
+    inputContainer.addEventListener("input", updateOutput);
+    outputEl.addEventListener("click", selectTemplateText);
+    copyToClipboardEl.addEventListener("click", e => {
+      const sel = selectTemplateText();
+      document.execCommand('copy');
+      // Timeout is just here to give some user feedback: text gets selected and
+      // then unselected
+      setTimeout(() => sel.removeAllRanges(), 100);
+    });
+    
+    // Update initial output.
+    updateOutput();
+  </script>
+
+</body>
+</html>
