@@ -1,0 +1,9 @@
+html{
+outline: solid 1px #f00;
+outline-offset: -1px;
+}
+
+body {
+  height: 10000px;
+  display: block;
+}

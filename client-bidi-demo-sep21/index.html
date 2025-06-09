@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BiDi Client</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="theme-selenium">
+  <h3>WebDriver BiDi Demo Client</h3>
+  <div class="wrapper">
+    <div id="connection-container">
+      <h4>Connect to Firefox</h4>
+      <div>
+        <input type=text id=host placeholder="hostname:port"/>
+        <button id=connect>connect</button>
+      </div>
+    </div>
+
+    <div id="commands-container">
+      <h4>Send WebDriver BiDi Commands</h4>
+      <div class="command" data-command="session.new">
+        <span class="command-info">method</span>
+        <span class="command-method">session.new</span>
+        <span class="command-info">params</span>
+        <span class="command-params">{ }</span>
+        <button class="command-send" >send</button>
+      </div>
+      <div class="command" data-command="session.subscribe">
+        <span class="command-info">method</span>
+        <span class="command-method">session.subscribe</span>
+        <span class="command-info">params</span>
+        <span class="command-params">{ events: ["log.entryAdded"] }</span>
+        <button class="command-send">send</button>
+      </div>
+    </div>
+  </div>
+  <div class="separator"></div>
+  <div class="wrapper">
+
+    <div id="requests-container">
+      <h4>WebDriver BiDi Protocol Traffic</h4>
+      <div id="requests-log">
+        <div class="log event" id="fake-request">
+          <span style="font-style: italic;">No traffic yet!</span>
+        </div>
+      </div>
+    </div>
+    
+    <div id="events-container">
+      <h4>Log events</h4>
+      <div id="events-log">
+        <div class="log event" id="fake-event">
+          <span style="font-style: italic;">No log event yet!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

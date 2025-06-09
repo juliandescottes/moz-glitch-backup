@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="windows-1251"/>
+		<link rel="stylesheet" href="multibyte-line.css">
+	</head>
+	<body>
+		<h1>Broken CSS rule editor</h1>
+		<p class="block">
+			Inspect this element and try to disable the font-weight CSS property.
+		</p>
+		<p>
+			Single byte HTML encoding (windows-1251)
+			breaks disabling of CSS rules
+			from a stylesheet in multibyte encoding (UTF-8, "Áëîê")
+			in the DOM inspector.
+    </p>
+	</body>
+</html>

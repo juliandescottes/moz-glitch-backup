@@ -1,0 +1,31 @@
+<head>
+  <style>
+    #container {
+      width: 200px;
+      height: 100px;
+      border: 1px solid #000;
+      align-content: space-between;
+      order: 1;
+    }
+
+    .flex-item {
+      flex-basis: auto;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-direction: row;
+    }
+
+    #self-aligned {
+      align-self: stretch;
+    }
+  </style>
+</head>
+<body>
+    <h1>browser_rules_inactive_css_flexbox.js</h1>
+    <div id="container" style="display:flex">
+      <div class="flex-item item-1" style="order:1">1</div>
+      <div class="flex-item item-2" style="order:2">2</div>
+      <div class="flex-item item-3" style="order:3">3</div>
+    </div>
+    <div id="self-aligned"></div>
+</body>

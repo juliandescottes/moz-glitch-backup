@@ -1,0 +1,5 @@
+@import "other.css?1";
+
+.tiles .cp .title {
+  color: red;
+}

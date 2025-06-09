@@ -1,0 +1,9 @@
+<body onunload="onUnload()">
+            <a href="https://www.example.com">click here</a>
+            <script>
+                window.alert(localStorage.getItem("test_link_unload_event"));
+                function onUnload() {
+                    localStorage.setItem("test_link_unload_event", "true");
+                }
+            </script>
+        </body>

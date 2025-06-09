@@ -1,0 +1,11 @@
+hello 
+<script>
+  window.addEventListener('unload', e => { 
+    debugger;
+    console.log('UNLOAD', e); 
+  }); 
+  window.addEventListener('pagehide', e => { 
+    debugger;
+    console.log('PAGEHIDE', e); 
+  });
+</script>

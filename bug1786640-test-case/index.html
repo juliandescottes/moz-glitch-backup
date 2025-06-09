@@ -1,0 +1,9 @@
+<body onunload="checkUnload()">
+    <a href="other.html">click here</a>
+    <input type=checkbox>
+    <script>
+        function checkUnload() {
+            document.getElementsByTagName("input")[0].checked = true;
+        }
+    </script>
+</body>

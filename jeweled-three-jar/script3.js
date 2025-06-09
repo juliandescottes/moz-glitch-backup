@@ -1,0 +1,1 @@
+window.script3 = true

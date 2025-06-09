@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div style="width: 100px; height: 200px; background: #EEE; overflow: auto">
+    <div id="inner" style="width: 10px; height: 100px; background: #FAA"></div>
+  </div>
+  <button>clickme</button>
+  <script type="text/javascript">
+    const button = document.querySelector("button");
+    button.addEventListener("click", async () => {
+      const inner1 = document.querySelector("#inner");
+      inner1.style.height = "300px";
+      await new Promise(r => setTimeout(r, 1000));
+      inner1.style.height = "100px";
+    });
+  </script>
+</body>
+</html>

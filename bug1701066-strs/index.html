@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <button>Update local storage and navigate</button>
+    <script type="text/javascript">
+      const index = (localStorage.getItem("bug1701066-existingvalue") || 0) * 1;
+      const updateLocalStorageAndNavigate = function() {
+        localStorage.setItem("bug1701066-existingvalue", index + 1);
+        localStorage.setItem("bug1701066-newvalue-" + (index + 1), index + 1);
+        window.location.href = "https://bug1701066-strs.glitch.me/?" + index;
+      }
+      document.querySelector("button").addEventListener("click", updateLocalStorageAndNavigate);
+    </script>
+  </body>
+</html>

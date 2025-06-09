@@ -1,0 +1,23 @@
+<test-component>
+        <inner-component slot="non-existing-slot"></inner-component>
+      </test-component>
+
+      <script>
+        "use strict";
+
+        customElements.define('test-component', class extends HTMLElement {
+          constructor() {
+            super();
+            let shadowRoot = this.attachShadow({mode: "open"});
+            shadowRoot.innerHTML = '<div>Cannot inspect</div>'
+          }
+        });
+
+        customElements.define('inner-component', class extends HTMLElement {
+          constructor() {
+            super();
+            let shadowRoot = this.attachShadow({mode: "open"});
+            shadowRoot.innerHTML = 'second-element-content'
+          }
+        });
+      </script>

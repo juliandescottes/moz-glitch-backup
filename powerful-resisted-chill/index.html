@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>  
+  <body>
+    <div class="tooltip" style="height:300px; width:300px;background:pink">
+      <div style="height:30px; width:100px; background:red">
+      </div>
+      <button disabled="true">
+        disabled
+      </button>
+    </div>
+    <script type="text/javascript">
+      const tooltip = document.querySelector(".tooltip");
+      tooltip.addEventListener("mouseenter", evt => console.log("mouseenter", evt));
+      tooltip.addEventListener("mouseleave", evt => console.log("mouseleave", evt)); 
+    </script>
+  </body>
+</html>

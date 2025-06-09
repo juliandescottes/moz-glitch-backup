@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <test-component >
+    <div slot="slot1">slot1-1</div>
+    <div slot="unslotted">unslotted</div>
+  </test-component>
+<script>
+(function() {
+  'use strict';
+  function defineComponent(name, html) {
+    customElements.define(name, class extends HTMLElement {
+      constructor() {
+        super();
+        const shadowRoot = this.attachShadow({mode: 'open'});
+        shadowRoot.innerHTML = html;
+      }
+    });
+  }
+
+  defineComponent('test-component', `
+    <div id="slot1-container">
+      <slot name="slot1"></slot>
+    </div>`);
+})();
+</script>
+</body>
+</html>

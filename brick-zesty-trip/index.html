@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <script type="text/javascript">
+      const iframe = document.createElement("iframe");
+      iframe.src = "about:blank";
+      iframe.addEventListener('load', () => {
+        window.setTimeout(() => {
+          iframe.contentDocument.write('<!DOCTYPE html><html lang='.concat('en', '>done</html>'));
+        }, 5000);
+      });
+      document.body.appendChild(iframe);
+    </script>
+  </body>
+</html>

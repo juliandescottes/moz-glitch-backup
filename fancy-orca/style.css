@@ -1,0 +1,26 @@
+div {
+  display: list-item;
+}
+  
+div::marker {
+  color: blue;
+  background: red;
+  content: "test";
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  width: 200px;
+  position: absolute;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 100%; 
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}

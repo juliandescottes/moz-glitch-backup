@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <style></style>
+    <button>
+       Click to add stylesheet
+    </button>
+    <script type="text/javascript">
+      document.querySelector("button").addEventListener("click", () => {
+        document.querySelector("style").innerHTML = `
+          html { 
+            background-color: #${Math.floor(Math.random()*16777215).toString(16)} 
+          }
+        `;
+      })
+    </script>
+  </body>
+</html>

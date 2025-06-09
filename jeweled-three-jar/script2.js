@@ -1,0 +1,1 @@
+window.script2 = true

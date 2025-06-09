@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    
+    <script type="module">
+      import whatwgURL from "./script.mjs";
+      window.whatwgURL = whatwgURL;
+      document.querySelector("button").addEventListener("click", () => {
+        var d1 = Date.now();
+        for (var i = 0; i < 100000 ; i++) {
+          whatwgURL.basicURLParse("http://example.com/test?hi#ref");
+        }
+        var d2 = Date.now();
+        console.log("whatwgURL.basicURLParse", d2 - d1);
+        
+        for (var i = 0; i < 100000 ; i++) {
+          new URL("http://example.com/test?hi#ref");
+        }
+        console.log("new URL", Date.now() - d2);
+      });
+    </script>
+    
+    <button>perf</button>
+  </body>
+</html>

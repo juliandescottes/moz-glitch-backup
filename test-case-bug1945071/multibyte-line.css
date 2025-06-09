@@ -1,0 +1,3 @@
+@charset "utf-8";
+/* Single line with multibyte characters before a rule */
+.block:before{content: 'Блок: ';}.block{font-weight: bold;}

@@ -1,0 +1,2 @@
+.status {color: green;}
+.status:after {content: ' and active';}

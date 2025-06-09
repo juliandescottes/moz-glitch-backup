@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <input disabled>
+    <button>toggle input</button>
+    <script type="text/javascript">
+      const button = document.querySelector("button");
+      button.addEventListener("click", function() {
+        document.querySelector("input").toggleAttribute("disabled");
+      });
+    </script>
+  </body>
+</html>

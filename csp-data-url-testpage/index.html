@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self';
+        " />
+    <style>
+        #helloCSP {
+            width: 50px;
+            height: 50px;
+            background: url(data:image/png;base64,R0lGODlhDwAPAOZEAMkJCfAwMMYGBtZMTP75+euIiPFBP+hVVf3v7+iHh/JNTfh9dNUYGPjTvskXFfOLi/daVe96es4eHPWIiOqbi9dNRvzWwexdV9U1NeFSS94iIvuxodVGP/ZsZM8jI+ibm/alluQzMdxSSvbGstwsKu2Yid4iIfjQu/JnYO6djvajlMQEBPvLuOJdXeMxL/3jzPBSTdwqKNY2Mf3i4vU5OfbPz/3f3/zUv/zizO0tLc0NDfMzM+UlJekpKeEhId0dHdUVFdkZGdEREf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAEQALAAAAAAPAA8AAAepgESCRBsLEDQQCxuDgxYdO5CROx0WgywGAQEKM0M2CpkGN0QvMDmmE0OpE6Y5KEQqPbE9D6lDD7I9IBc8vDwRtRG9PBcuPsY+B7UHxz4hP8/PGghDCBrQPyYxQdvbBUMF3NskGUDl5QwtDOblGSVC7+8JNQnw7yk4Mjr6GLUY+joiBI2QAACABwJDCHgoKOHEoAYVBAgY8GGAxAoNGAmiwMHBCgccKDAKBAA7) no-repeat;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<h1>CSP</h1>
+    <div id="helloCSP"></div>
+</body>
+</html>

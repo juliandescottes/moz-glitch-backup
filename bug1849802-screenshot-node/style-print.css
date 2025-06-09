@@ -1,0 +1,337 @@
+/*
+    Document   : siDocPrint.css
+    Created on : August 16, 2006, 12:50 AM
+    Author     : rzrzdn
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root {
+    display: block;
+}
+
+font {
+    font-size: 100%;
+}
+
+body {
+    font-size: 12pt;
+    font-style: normal;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    background-color: white;
+    font-weight: normal;
+}
+
+img {
+     border: 0;
+}
+
+.Largest {
+    font-size: 18pt;
+}
+
+.Larger {
+    font-size: 16pt;
+}
+
+.Large {
+    font-size: 14pt;
+}
+
+.Normal {
+    font-size: 12pt;
+}
+
+.Small {
+    font-size: 10pt;
+}
+
+.Smaller {
+    font-size: 8pt;
+}
+
+.Smallest {
+    font-size: 6pt;
+}
+
+.bLargest {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.bLarger {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.bLarge {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.bNormal {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.bSmall {
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.bSmaller {
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+.bSmallest {
+    font-size: 6pt;
+    font-weight: bold;
+}
+
+.tvaError {
+    color: red;
+    font-weight: bold;
+}
+
+.tvaNormal {
+    color: black;
+    font-weight: normal;
+}
+
+#banner, #c2cRd, #hdrLogo, #hdrIcons {
+    display: none !important;
+}
+
+#pageTitle {
+    font-weight: bold;
+    text-align: center;
+    padding-top: 9pt;
+}
+
+#searchType {
+    text-align: right;
+    font-size: 8pt;
+    margin-bottom: 6pt;
+}
+
+#AdvKWS {
+    float: left;
+    display: none;
+}
+
+#BasicKWS {
+    float: left;
+    display: block;
+}
+
+#ToggleKWS {
+    float: left;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+div#search {
+    font-size: 10pt;
+    text-align: center;
+    display: block;
+}
+
+div#search span {
+    white-space: nowrap;
+}
+
+div#search #search1b {
+    white-space: normal;
+    display: inline;
+}
+
+div#search #search1b span {
+   white-space: nowrap;
+}
+
+div#search #search1a {
+    white-space: normal;
+    display: none;
+}
+
+div#search #sctnField {
+    display: none;
+}
+
+div#search #ltgField {
+    display: none;
+}
+
+div#search #ltgField span {
+    white-space: nowrap;
+}
+
+#search2 {
+    font-size: 8pt;
+    text-align: center;
+    padding-top: 2pt;
+}
+
+#inProgress {
+    display: none;
+    text-align: center;
+    color: red;
+}
+
+div#tBody {
+    padding-bottom: 6pt;
+}
+
+#latestNews h3 {
+    margin-left: 30px;
+}
+
+#latestNews li {
+    margin-left: 40px;
+}
+
+#searchResults h3 {
+    margin-left: 20px;
+}
+
+#searchResults li {
+    vertical-align: top;
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+    font-size: 10pt;
+    margin-left: 30px;
+}
+
+#wip {
+    display: inline;
+    color: red;
+    font-weight: bold;
+}
+
+div#dBody {
+    font-size: 10pt;
+    overflow: visible;
+}
+
+div#dBody td {
+    font-size: 10pt;
+}
+
+div#dBody #hitlist li {
+    vertical-align: top;
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+    font-size: 10pt;
+}
+
+div#dBody #hitlist li.dmG {
+    color: grey;
+    list-style-image: url(/si/images/bdocument.gif);
+    list-style-type: square;
+}
+
+div#dBody #hitlist li.hmG {
+    color: grey;
+    list-style-image: url(/si/images/barrowbutton1.gif);
+    list-style-type: circle;
+}
+
+div#dBody #hitlist li.hdG {
+    color: grey;
+    list-style-image: url(/si/images/barrowbutton3.gif);
+    list-style-type: disc;
+}
+
+div#dBody #hitlist li.dm {
+    list-style-image: url(/si/images/bdocument.gif);
+    list-style-type: square;
+}
+
+div#dBody #hitlist li.hm {
+    list-style-image: url(/si/images/barrowbutton1.gif);
+    list-style-type: circle;
+}
+
+div#dBody #hitlist li.hd {
+    list-style-image: url(/si/images/barrowbutton3.gif);
+    list-style-type: disc;
+}
+
+div#dBody #hitlist dl {
+    margin-left: 30px;
+    font-size: 10pt;
+}
+
+div#dBody #hitlist dt {
+    font-weight: bold;
+    padding-top: 9pt;
+}
+
+div#dBody #hitlist dd {
+    font-weight: normal;
+    padding-top: 3pt;
+}
+
+div#dBody #hitlist #noDocs {
+    font-weight: normal;
+    font-size: 14pt;
+    color: red;
+}
+
+#copyright {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+#copyright hr {
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+#copyright span {
+    font-size: 8pt;
+}
+
+div#breadCrumbs {
+    font-size: 10pt;
+    text-align: center;
+}
+
+div#breadCrumbs .hl {
+    font-size: 8pt;
+    white-space: nowrap;
+}
+
+div#breadCrumbs .hn {
+    font-size: 8pt;
+    white-space: nowrap;
+}
+
+div#breadCrumbs .nl {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+div#motd {
+    font-size: 10pt;
+    float: right;
+    clear: none;
+    width: 310px;
+    color:  black;
+    border: thin solid black;
+    background-color: rgb(240,240,240);
+    overflow: auto;
+}
+
+div#motd div{
+    margin: 5px;
+}
+
+div#motd li { 
+    font-size: 10pt;
+}

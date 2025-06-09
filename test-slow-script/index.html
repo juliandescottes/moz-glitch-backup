@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <label>Seconds</label>
+    <input type="number" value=5>
+    <button>Run slow script</button>
+    <script type="text/javascript">
+      document.querySelector("button").addEventListener("click", () => {
+        const seconds = parseInt(document.querySelector("input").value);
+        console.log(`Run while loop for ${seconds} seconds`);
+        const start = Date.now();
+        let currentSecond = 0;
+        
+        const interval = setInterval(() => {
+          console.log("This is a dummy log performed every ~50ms");
+        }, 50);
+        
+        while (Date.now() < start + (1000 * seconds)) {
+          const actualSecond = Math.floor((Date.now() - start) / 1000);
+          if (actualSecond != currentSecond) {
+            currentSecond = actualSecond;
+            console.log(`${actualSecond} second(s) elapsed`);
+          }
+        }
+        console.log(`While loop finished!`);
+        clearInterval(interval);
+      })
+    </script>
+  </body>
+</html>

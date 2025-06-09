@@ -1,0 +1,1 @@
+function A() { B() } function B() {try { test() } catch (e) {console.log(e.stack, typeof e.stack)}} A()

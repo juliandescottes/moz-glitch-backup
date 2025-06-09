@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div style="display:grid">GRID IN ROOT PAGE</div>
+    <button>Add new iframe</button>
+    <script type="text/javascript">
+      const button = document.querySelector("button");
+      button.addEventListener("click", function() {
+        const iframe = document.createElement("iframe");
+        iframe.setAttribute("src", "https://frame-grid-fission.glitch.me/");
+        document.body.appendChild(iframe);
+      });
+    </script>
+  </body>
+</html>

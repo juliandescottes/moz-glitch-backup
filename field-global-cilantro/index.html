@@ -1,0 +1,14 @@
+<html>
+  <script>
+    [1,2,3,4,5,6,8,9].reduce(
+      (acc, key) => acc.then(async () => {
+        await new Promise(r => setTimeout(r, 1000));
+        const needToDoSomething = false;
+        if (needToDoSomething) {
+          console.log("Should never run");
+        }
+      }),
+      Promise.resolve()
+    );
+  </script>
+</html>

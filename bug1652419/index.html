@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>glitch root</title>
+  </head>  
+  <body>
+    <iframe src="https://bug1652419.glitch.me/frame1.html"></iframe>
+    <div>
+      <button>Navigate frame</button>
+    </div>
+    <script type="text/javascript"> 
+      const button = document.querySelector("button");
+      button.addEventListener("click", () => {
+        const iframe = document.querySelector("iframe"); 
+        const newSrc = iframe.getAttribute("src").includes("frame2.html") ? 
+              "https://bug1652419.glitch.me/frame1.html" : "https://bug1652419.glitch.me/frame2.html";
+        iframe.setAttribute("src", newSrc);
+      });
+    </script>
+  </body>
+</html>
