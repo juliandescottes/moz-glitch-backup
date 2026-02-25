@@ -49,14 +49,13 @@
       
       const dateRequest = await fetch("https://whattrainisitnow.com/api/release/schedule/?version=" + cycleVersion);
       const dateJson = await dateRequest.json();
-      const softFreeze = dateJson.soft_code_freeze.split(" ")[0];
       const mergeDay = dateJson.merge_day.split(" ")[0];
 
       const backwardCleanupVersion = cycleVersion - 2;
       const smokeTestReleaseVersion = cycleVersion - 1;
       const qaVersion = cycleVersion - 1;
       const template =
-`Soft Freeze / Merge Date: ${softFreeze} / ${mergeDay} (from the [Release train page](https://whattrainisitnow.com/))
+`Merge Date: ${mergeDay} (from the [Release train page](https://whattrainisitnow.com/))
 More details about any of those tasks can be found at: https://firefox-source-docs.mozilla.org/devtools/release.html
 
 Anytime during the release:
